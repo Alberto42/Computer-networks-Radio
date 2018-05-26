@@ -1,0 +1,17 @@
+./echo-client 239.10.11.13 10756 LOUDER_PLEASE\ 10,12
+echo -n "ZERO_SEVEN_COME_IN" | nc -u 239.10.11.13 10756
+./echo-client 239.10.11.13 10756 ZERO_SEVEN_COME_IN
+
+ip.addr == 239.10.11.12 || ip.addr == 239.10.11.13 || udp.port == 30756 || udp.port == 20756 || udp.port == 10756 || frame contains "BOREWICZ_HERE"
+
+
+sox -S "../sugar.mp3" -r 44100 -b 16 -e signed-integer -c 2 -t raw - | pv -q -L $((44100*4)) | ./sikradio-sender -a 239.10.11.12 -n "Sugar" -d 239.10.11.13
+
+sox -S "../NyanCat.mp3" -r 44100 -b 16 -e signed-integer -c 2 -t raw - | pv -q -L $((44100*4)) | ./sikradio-sender -a 239.10.11.14 -n "NyanCat" -d 239.10.11.13
+
+
+./sikradio-receiver -d 239.10.11.13 -U 10002| play -t raw -c 2 -r 44100 -b 16 -e signed-integer --buffer 32768 -
+./sikradio-receiver -d 239.10.11.13 -U 10002 -b 1000000| play -t raw -c 2 -r 44100 -b 16 -e signed-integer --buffer 727680 -
+
+./sikradio-sender -a 239.10.11.12 -d 239.10.11.13 -p 5
+./sikradio-receiver -d 239.10.11.13 -b 9
