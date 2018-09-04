@@ -515,7 +515,6 @@ int main(int argc, const char *argv[]) {
         if (clean_stations_get_timeout() == 0)
             clean_stations(); //Every 20 seconds clean not-responding stations
         long min_sleep_time = clean_stations_get_timeout();
-        //Wczytuj rozne rodzaje wejsc: od UI, przychodzace paczki od nadajnika, informacje o nowych nadajnikach
         //Read diffrent types of input: UI, packages from station, information about new stations
         poll(&handle_client_key,&handle_client_connect,&listen,&receive_reply,min_sleep_time);
     }

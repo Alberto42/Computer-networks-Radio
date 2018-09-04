@@ -18,7 +18,7 @@ void init_multicast_listen(int &sock, in_addr address,
     struct sockaddr_in local_address;
 
 
-    /* otworzenie gniazda */
+    /* Open socket*/
     sock = socket(AF_INET, SOCK_DGRAM, 0);
     if (sock < 0)
         syserr("socket");
